@@ -68,9 +68,7 @@ namespace :deploy do
           backup_path = release_path.join('assets_manifest_backup')
 
           execute :mkdir, '-p', backup_path
-          execute :cp,
-            detect_manifest_path,
-            backup_path
+          execute :cp, detect_manifest_path, backup_path
         end
       end
     end
@@ -92,10 +90,7 @@ namespace :deploy do
     end
 
     def detect_manifest_path
-      %w(
-        .sprockets-manifest*
-        manifest*.*
-      ).each do |pattern|
+      %w(.sprockets-manifest* manifest*.*).each do |pattern|
         candidate = release_path.join('public', fetch(:assets_prefix), pattern)
         return capture(:ls, candidate).strip if test(:ls, candidate)
       end
