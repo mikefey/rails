@@ -21,7 +21,7 @@ namespace :deploy do
   desc 'Compile assets'
   task :compile_assets => [:set_rails_env] do
     invoke 'deploy:assets:precompile'
-    invoke 'deploy:assets:backup_manifest'
+    #invoke 'deploy:assets:backup_manifest'
   end
 
   # FIXME: it removes every asset it has just compiled
@@ -68,14 +68,9 @@ namespace :deploy do
           backup_path = release_path.join('assets_manifest_backup')
 
           execute :mkdir, '-p', backup_path
-
-          puts 'detect_manifest_path.to_s.strip: '
-          puts detect_manifest_path.to_s.strip
-
-          puts 'backup_path.to_s.strip: '
-          puts backup_path.to_s.strip
-
-          execute :cp, detect_manifest_path.to_s.strip, backup_path.to_s.strip
+          execute :cp,
+            detect_manifest_path,
+            backup_path
         end
       end
     end
