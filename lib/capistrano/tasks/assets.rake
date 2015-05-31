@@ -68,7 +68,7 @@ namespace :deploy do
           backup_path = release_path.join('assets_manifest_backup')
 
           execute :mkdir, '-p', backup_path
-          execute :cp, detect_manifest_path, backup_path
+          execute :cp, detect_manifest_path.to_s.strip, backup_path.to_s.strip
         end
       end
     end
