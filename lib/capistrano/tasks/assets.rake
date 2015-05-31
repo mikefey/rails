@@ -21,7 +21,7 @@ namespace :deploy do
   desc 'Compile assets'
   task :compile_assets => [:set_rails_env] do
     invoke 'deploy:assets:precompile'
-    invoke 'deploy:assets:backup_manifest'
+    #invoke 'deploy:assets:backup_manifest'
   end
 
   # FIXME: it removes every asset it has just compiled
